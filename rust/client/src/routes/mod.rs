@@ -4,3 +4,4 @@ pub mod order;
 pub mod rfq;
 pub mod trades;
 pub mod user;
+pub mod account;
