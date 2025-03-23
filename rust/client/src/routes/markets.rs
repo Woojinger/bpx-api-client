@@ -43,7 +43,7 @@ impl BpxClient {
 
     /// Retrieves the order book depth for a given symbol.
     pub async fn get_order_book_depth(&self, symbol: &str) -> Result<OrderBookDepth> {
-        let url = format!("{}{}&symbol={}", self.base_url, API_DEPTH, symbol);
+        let url = format!("{}{}?symbol={}", self.base_url, API_DEPTH, symbol);
         let res = self.get(url).await?;
         res.json().await.map_err(Into::into)
     }
