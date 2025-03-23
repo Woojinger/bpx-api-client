@@ -284,7 +284,7 @@ impl BpxClient {
         req.headers_mut()
             .insert(WINDOW_HEADER, DEFAULT_WINDOW.to_string().parse()?);
 
-        if matches!(req.method(), &Method::POST | &Method::DELETE) {
+        if matches!(req.method(), &Method::POST | &Method::DELETE | &Method::PATCH) {
             req.headers_mut().insert(CONTENT_TYPE, JSON_CONTENT.parse()?);
         }
 
