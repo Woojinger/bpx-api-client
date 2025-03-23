@@ -5,9 +5,9 @@ use crate::order::{LimitOrder, MarketOrder};
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct PatchAccountPayload {
-    pub autoBorrowSettlements: bool,
-    pub autoLend: bool,
-    pub autoRepayBorrows: bool,
-    pub leverageLimit: Decimal,
+    pub autoBorrowSettlements: Option<bool>,
+    pub autoLend: Option<bool>,
+    pub autoRepayBorrows: Option<bool>,
+    pub leverageLimit: Option<Decimal>,
 }
 
