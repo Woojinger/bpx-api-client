@@ -37,6 +37,7 @@ use routes::{
     order::{API_ORDER, API_ORDERS},
     rfq::{API_RFQ, API_RFQ_QUOTE},
     user::API_USER_2FA,
+    account::API_ACCOUNT
 };
 use serde::Serialize;
 use std::{
@@ -245,6 +246,7 @@ impl BpxClient {
             API_ORDERS if req.method() == Method::DELETE => "orderCancelAll",
             API_RFQ if req.method() == Method::POST => "rfqSubmit",
             API_RFQ_QUOTE if req.method() == Method::POST => "quoteSubmit",
+            API_ACCOUNT => "accountUpdate",
             _ => return Ok(()), // Other endpoints don't require signing.
         };
 

@@ -5,7 +5,7 @@ use std::error::Error;
 
 use crate::BpxClient;
 
-const API_ACCOUNT: &str = "/api/v1/account";
+pub const API_ACCOUNT: &str = "/api/v1/account";
 
 #[derive(Debug, Deserialize)]
 pub struct AccountDetails {
