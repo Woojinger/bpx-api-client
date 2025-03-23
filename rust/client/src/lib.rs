@@ -203,6 +203,14 @@ impl BpxClient {
         let res = self.client.execute(req).await?;
         Self::process_response(res).await
     }
+    
+    pub async fn patch<P: Serialize, U: IntoUrl>(&self, url: U, payload: P) -> Result<Response> {
+        let mut req = self.client.patch(url).json(&payload).build()?;
+        tracing::debug!("req: {:?}", req);
+        self.sign(&mut req)?;
+        let res = self.client.execute(req).await?;
+        Self::process_response(res).await
+    }
 
     /// Returns a reference to the `VerifyingKey` used for request verification.
     pub fn verifier(&self) -> &VerifyingKey {
