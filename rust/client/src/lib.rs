@@ -193,14 +193,14 @@ impl BpxClient {
         let mut req = match req {
             Ok(request) => request,
             Err(e) => {
-                tracing::error!("Failed to build the request: {:?}", e);
+                println!("Failed to build the request: {:?}", e);
                 return Err(e.into());
             },
         };
         tracing::debug!("req: {:?}", req);
         let sign_result = self.sign(&mut req);
         if let Err(e) = sign_result {
-            tracing::error!("Failed to sign the request: {:?}", e);
+            println!("Failed to sign the request: {:?}", e);
             return Err(e);
         }
         //let res = self.client.execute(req).await?;
@@ -208,7 +208,7 @@ impl BpxClient {
         let mut res = match res {
             Ok(response) => response,
             Err(e) => {
-                tracing::error!("Failed to execute the request: {:?}", e);
+                println!("Failed to execute the request: {:?}", e);
                 return Err(e.into())
             },
         };
