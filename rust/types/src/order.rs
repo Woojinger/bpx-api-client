@@ -101,47 +101,6 @@ pub enum Side {
     Ask,
 }
 
-// Custom serialize function for boolean as string
-fn serialize_as_string<S>(value: &Option<bool>, serializer: S) -> Result<S::Ok, S::Error>
-where
-    S: Serializer,
-{
-    match value {
-        Some(true) => serializer.serialize_str("true"),
-        Some(false) => serializer.serialize_str("false"),
-        None => serializer.serialize_none(),
-    }
-}
-
-// Custom deserialize function for boolean from string
-fn deserialize_from_string<'de, D>(deserializer: D) -> Result<Option<bool>, D::Error>
-where
-    D: Deserializer<'de>,
-{
-    struct StringToBoolVisitor;
-
-    impl<'de> Visitor<'de> for StringToBoolVisitor {
-        type Value = Option<bool>;
-
-        fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
-            formatter.write_str("a string 'true' or 'false'")
-        }
-
-        fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
-        where
-            E: de::Error,
-        {
-            match value {
-                "true" => Ok(Some(true)),
-                "false" => Ok(Some(false)),
-                _ => Err(E::custom(format!("unexpected value: {}", value))),
-            }
-        }
-    }
-
-    deserializer.deserialize_option(StringToBoolVisitor)
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct ExecuteOrderPayload {
@@ -156,7 +115,7 @@ pub struct ExecuteOrderPayload {
     pub quantity: Option<Decimal>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub quote_quantity: Option<Decimal>,
-    #[serde(skip_serializing_if = "Option::is_none", serialize_with = "serialize_as_string", deserialize_with = "deserialize_from_string")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reduce_only: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub self_trade_prevention: Option<SelfTradePrevention>,
