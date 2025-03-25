@@ -113,6 +113,8 @@ pub struct ExecuteOrderPayload {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub quote_quantity: Option<Decimal>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub reduce_only: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub self_trade_prevention: Option<SelfTradePrevention>,
     pub side: Side,
     pub symbol: String,
