@@ -189,10 +189,29 @@ impl BpxClient {
 
     /// Sends a POST request with a JSON payload to the specified URL and signs it.
     pub async fn post<P: Serialize, U: IntoUrl>(&self, url: U, payload: P) -> Result<Response> {
-        let mut req = self.client.post(url).json(&payload).build()?;
+        let mut req = self.client.post(url).json(&payload).build();
+        let mut req = match req {
+            Ok(request) => request,
+            Err(e) => {
+                tracing::error!("Failed to build the request: {:?}", e);
+                return Err(e.into());
+            },
+        };
         tracing::debug!("req: {:?}", req);
-        self.sign(&mut req)?;
-        let res = self.client.execute(req).await?;
+        let sign_result = self.sign(&mut req);
+        if let Err(e) = sign_result {
+            tracing::error!("Failed to sign the request: {:?}", e);
+            return Err(e);
+        }
+        //let res = self.client.execute(req).await?;
+        let res = self.client.execute(req).await;
+        let mut res = match res {
+            Ok(response) => response,
+            Err(e) => {
+                tracing::error!("Failed to execute the request: {:?}", e);
+                return Err(e.into())
+            },
+        };
         Self::process_response(res).await
     }
 
