@@ -15,20 +15,27 @@ pub struct Balance {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Collateral {
-    pub asset_value: String,
+    // Explicitly rename because the JSON uses "assetsValue" rather than the implied "assetValue"
+    #[serde(rename = "assetsValue")]
+    pub assets_value: String,
+
     pub borrow_liability: String,
     pub collateral: Vec<CollateralAsset>,
     pub imf: String,
     pub unsettled_equity: String,
     pub liabilities_value: String,
+
     #[serde(skip_serializing_if = "Option::is_none")]
     pub margin_fraction: Option<String>,
-    pub mff: String,
+
+    // The JSON is "mmf", so match that here
+    pub mmf: String,
+
     pub net_equity: String,
     pub net_equity_available: String,
     pub net_equity_locked: String,
     pub net_exposure_futures: String,
-    pub pnl_unrealized: String
+    pub pnl_unrealized: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -44,6 +51,7 @@ pub struct CollateralAsset {
     pub lend_quantity: String,
     pub available_quantity: String,
 }
+
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
