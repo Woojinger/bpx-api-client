@@ -23,3 +23,10 @@ pub struct RequestBorrowLendPayload {
     pub side: String,
     pub symbol: String,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct RequestBorrowLendResponse {
+    pub code: String,
+    pub message: String,
+}
