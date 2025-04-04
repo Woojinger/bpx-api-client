@@ -12,7 +12,7 @@ use crate::BpxClient;
 pub const API_CAPITAL: &str = "/api/v1/capital";
 
 #[doc(hidden)]
-pub const API_COLLATERAL: &str = "/api/v1/collateral";
+pub const API_COLLATERAL: &str = "/api/v1/capital/collateral";
 
 #[doc(hidden)]
 pub const API_DEPOSITS: &str = "/wapi/v1/capital/deposits";
@@ -28,7 +28,7 @@ impl BpxClient {
         let res = self.get(url).await?;
         res.json().await.map_err(Into::into)
     }
-    
+
     pub async fn get_collateral(&self) -> Result<Collateral> {
         let url = format!("{}{}", self.base_url, API_COLLATERAL);
         let res = self.get(url).await?;
