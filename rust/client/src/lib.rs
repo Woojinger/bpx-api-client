@@ -37,7 +37,8 @@ use routes::{
     order::{API_ORDER, API_ORDERS},
     rfq::{API_RFQ, API_RFQ_QUOTE},
     user::API_USER_2FA,
-    account::API_ACCOUNT
+    account::API_ACCOUNT,
+    lend::{API_BORROW_LEND_POSITION, API_BORROW_LEND},
 };
 use serde::Serialize;
 use std::{
@@ -266,6 +267,8 @@ impl BpxClient {
             API_RFQ if req.method() == Method::POST => "rfqSubmit",
             API_RFQ_QUOTE if req.method() == Method::POST => "quoteSubmit",
             API_ACCOUNT => "accountUpdate",
+            API_BORROW_LEND_POSITION if req.method() == Method::GET => "borrowLendPositionQuery",
+            API_BORROW_LEND if  req.method() == Method::POST => "borrowLendExecute",
             _ => return Ok(()), // Other endpoints don't require signing.
         };
 

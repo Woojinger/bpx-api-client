@@ -13,6 +13,7 @@ pub mod rfq;
 pub mod trade;
 pub mod user;
 pub mod account;
+pub mod lend;
 
 #[derive(Debug, Display, Clone, Copy, Serialize, Deserialize, Default, EnumString, PartialEq, Eq, Hash, EnumIter)]
 #[strum(serialize_all = "PascalCase")]
