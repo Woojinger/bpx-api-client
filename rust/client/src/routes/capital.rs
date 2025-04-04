@@ -1,6 +1,6 @@
 use crate::error::Result;
 use std::collections::HashMap;
-
+use tracing::info;
 use bpx_api_types::{
     capital::{Balance, Deposit, DepositAddress, RequestWithdrawalPayload, Withdrawal},
     Blockchain,
