@@ -29,13 +29,11 @@ impl BpxClient {
         res.json().await.map_err(Into::into)
     }
 
-    pub async fn get_collateral(&self) -> Result<Collateral> {
+    pub async fn get_collateral(&self) -> Result<String> {
         let url = format!("{}{}", self.base_url, API_COLLATERAL);
         let res = self.get(url).await;
-        match res {
-            Ok(res) => res.json().await.map_err(Into::into),
-            Err(err) => Err(err),
-        }
+        let content = res?.text().await?;
+        Ok(content)
     }
 
     /// Retrieves a list of deposits with optional pagination.
