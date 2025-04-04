@@ -32,6 +32,7 @@ impl BpxClient {
     pub async fn get_collateral(&self) -> Result<Collateral> {
         let url = format!("{}{}", self.base_url, API_COLLATERAL);
         let res = self.get(url).await?;
+        info!{"res: {:?}", &res}
         res.json().await.map_err(Into::into)
     }
 
