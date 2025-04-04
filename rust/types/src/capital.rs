@@ -14,6 +14,17 @@ pub struct Balance {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+pub struct Collateral {
+    pub asset_value: Decimal,
+    pub borrow_liability: Decimal,
+    pub imf: Decimal,
+    pub liabilities_value: Decimal,
+    pub net_equity: Decimal,
+    pub netEquityAvailable: Decimal,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Deposit {
     pub id: i32,
     pub to_address: Option<String>,

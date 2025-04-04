@@ -5,11 +5,15 @@ use bpx_api_types::{
     capital::{Balance, Deposit, DepositAddress, RequestWithdrawalPayload, Withdrawal},
     Blockchain,
 };
-
+use bpx_api_types::capital::Collateral;
 use crate::BpxClient;
 
 #[doc(hidden)]
 pub const API_CAPITAL: &str = "/api/v1/capital";
+
+#[doc(hidden)]
+pub const API_COLLATERAL: &str = "/api/v1/collateral";
+
 #[doc(hidden)]
 pub const API_DEPOSITS: &str = "/wapi/v1/capital/deposits";
 #[doc(hidden)]
@@ -21,6 +25,12 @@ impl BpxClient {
     /// Fetches the account's current balances.
     pub async fn get_balances(&self) -> Result<HashMap<String, Balance>> {
         let url = format!("{}{}", self.base_url, API_CAPITAL);
+        let res = self.get(url).await?;
+        res.json().await.map_err(Into::into)
+    }
+    
+    pub async fn get_collateral(&self) -> Result<Collateral> {
+        let url = format!("{}{}", self.base_url, API_COLLATERAL);
         let res = self.get(url).await?;
         res.json().await.map_err(Into::into)
     }

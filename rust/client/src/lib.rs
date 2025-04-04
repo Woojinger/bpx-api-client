@@ -269,6 +269,7 @@ impl BpxClient {
             API_ACCOUNT => "accountUpdate",
             API_BORROW_LEND_POSITION if req.method() == Method::GET => "borrowLendPositionQuery",
             API_BORROW_LEND if  req.method() == Method::POST => "borrowLendExecute",
+            API_COLLATERAL if req.method() == Method::GET => "collateralQuery",
             _ => return Ok(()), // Other endpoints don't require signing.
         };
 
