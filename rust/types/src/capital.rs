@@ -15,25 +15,21 @@ pub struct Balance {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Collateral {
-    pub code: String,
-    pub message: String,
+    pub asset_value: String,
+    pub borrow_liability: String,
+    pub collateral: Vec<CollateralAsset>,
+    pub imf: String,
+    pub unsettled_equity: String,
+    pub liabilities_value: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub margin_fraction: Option<String>,
+    pub mff: String,
+    pub net_equity: String,
+    pub net_equity_available: String,
+    pub net_equity_locked: String,
+    pub net_exposure_futures: String,
+    pub pnl_unrealized: String
 }
-
-// pub struct Collateral {
-//     pub asset_value: String,
-//     pub borrow_liability: String,
-//     pub collateral: Vec<CollateralAsset>,
-//     pub imf: String,
-//     pub unsettled_equity: String,
-//     pub liabilities_value: String,
-//     pub margin_fraction: String,
-//     pub mff: String,
-//     pub net_equity: String,
-//     pub net_equity_available: String,
-//     pub net_equity_locked: String,
-//     pub net_exposure_futures: String,
-//     pub pnl_unrealized: String
-// }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]

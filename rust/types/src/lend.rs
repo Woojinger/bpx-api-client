@@ -8,7 +8,7 @@ pub struct BorrowLendPosition {
     pub cumulative_interest: Decimal,
     pub id: String,
     pub imf: Decimal,
-    pub net_quantity: Decimal,
+    pub net_quantity: Decimal,  
     pub mark_price: Decimal,
     pub mmf: Decimal,
     pub net_exposure_quantity: Decimal,
