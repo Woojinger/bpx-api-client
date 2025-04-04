@@ -33,7 +33,7 @@ use base64::{engine::general_purpose::STANDARD, Engine};
 use ed25519_dalek::{Signature, Signer, SigningKey, VerifyingKey};
 use reqwest::{header::CONTENT_TYPE, IntoUrl, Method, Request, Response, StatusCode};
 use routes::{
-    capital::{API_CAPITAL, API_DEPOSITS, API_DEPOSIT_ADDRESS, API_WITHDRAWALS},
+    capital::{API_CAPITAL, API_DEPOSITS, API_DEPOSIT_ADDRESS, API_WITHDRAWALS, API_COLLATERAL},
     order::{API_ORDER, API_ORDERS},
     rfq::{API_RFQ, API_RFQ_QUOTE},
     user::API_USER_2FA,
